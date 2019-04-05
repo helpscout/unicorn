@@ -10,20 +10,20 @@ describe('createApiTypes', () => {
   test('Uses a fallback default namespace', () => {
     const types = createApiTypes()
 
-    expect(types.GET_RESOURCE_REQUESTED).toBeTruthy()
-    expect(types.PUT_RESOURCE_REQUESTED).toBeTruthy()
-    expect(types.PATCH_RESOURCE_REQUESTED).toBeTruthy()
-    expect(types.POST_RESOURCE_REQUESTED).toBeTruthy()
-    expect(types.DELETE_RESOURCE_REQUESTED).toBeTruthy()
+    expect(types.GET_REQUESTED).toBeTruthy()
+    expect(types.PUT_REQUESTED).toBeTruthy()
+    expect(types.PATCH_REQUESTED).toBeTruthy()
+    expect(types.POST_REQUESTED).toBeTruthy()
+    expect(types.DELETE_REQUESTED).toBeTruthy()
   })
 
   test('Can specific a unique namespace', () => {
     const types = createApiTypes('unicorn')
 
-    expect(types.GET_UNICORN_REQUESTED).toBeTruthy()
-    expect(types.PUT_UNICORN_REQUESTED).toBeTruthy()
-    expect(types.PATCH_UNICORN_REQUESTED).toBeTruthy()
-    expect(types.POST_UNICORN_REQUESTED).toBeTruthy()
-    expect(types.DELETE_UNICORN_REQUESTED).toBeTruthy()
+    expect(types.GET_REQUESTED).toBeTruthy()
+    expect(types.PUT_REQUESTED).toBeTruthy()
+    expect(types.PATCH_REQUESTED).toBeTruthy()
+    expect(types.POST_REQUESTED).toBeTruthy()
+    expect(types.DELETE_REQUESTED).toBeTruthy()
   })
 })
