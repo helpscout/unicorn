@@ -21,6 +21,28 @@
     "README.md",
     "LICENSE"
   ],
+  "author": "Jon Quach <hello@jonquach.com> (https://jonquach.com)",
+  "contributors": [
+    "Nickolas Kenyeres <nickolas@knicklabs.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/helpscout/unicorn.git"
+  },
+  "bugs": {
+    "url": "https://github.com/helpscout/unicorn/issues"
+  },
+  "keywords": [
+    "jest",
+    "enzyme",
+    "react",
+    "test",
+    "utils",
+    "utilities"
+  ],
+  "engines": {
+    "node": ">=8"
+  },
   "license": "MIT",
   "devDependencies": {
     "@helpscout/zero": "3.1.1",
