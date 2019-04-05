@@ -2,9 +2,10 @@ export const defaultNamespace = 'action'
 export const typePrefix = '@@'
 export const typeSeparator = '/'
 
-const createTypes = (namespace: string = defaultNamespace) => (
+const createTypes = (
+  namespace: string = defaultNamespace,
   keys: Array<string> = [],
-) => {
+): any => {
   const namespacedAction = `${typePrefix}${namespace.toUpperCase()}`
 
   return keys.reduce((keyMap, key) => {
@@ -13,7 +14,7 @@ const createTypes = (namespace: string = defaultNamespace) => (
 
     return {
       ...keyMap,
-      [renamedKey]: transformedKey,
+      [transformedKey]: renamedKey,
     }
   }, {})
 }
