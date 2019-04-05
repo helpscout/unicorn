@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Fragment from '@helpscout/react-utils/dist/Fragment'
-import Route from './router/Route'
-import Redirect from './router/Redirect'
+import Route from './Route'
+import Redirect from './Redirect'
 
 type CreateRouteOptions = {
   routes: Array<any>

@@ -3,5 +3,11 @@ export { default as createRoutes } from './createRoutes'
 export { default as createStore } from './createStore'
 export { default as createTypes } from './createTypes'
 
-export { default as Route } from './router/Route'
-export { default as withRouter } from './router/withRouter'
+// redux/connect
+export { default as connect } from './connect'
+export { default as connectWithRouter } from './connectWithRouter'
+
+// react-router
+export { default as Redirect } from './Redirect'
+export { default as Route } from './Route'
+export { default as withRouter } from './withRouter'
