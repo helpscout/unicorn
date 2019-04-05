@@ -1,4 +1,4 @@
-import createTypes from './createTypes'
+import createTypes from '../createTypes'
 
 describe('createTypes', () => {
   test('Generates an empty object by default', () => {
