@@ -1,0 +1,30 @@
+{
+  "name": "@helpscout/unicorn",
+  "version": "0.0.0",
+  "description": "A Delightful React Framework",
+  "main": "src/index.js",
+  "private": false,
+  "scripts": {
+    "prestart": "zero prestart",
+    "build": "zero build",
+    "lint": "zero lint",
+    "test": "zero test",
+    "format": "zero format",
+    "validate": "zero validate",
+    "release": "zero release",
+    "version": "zero build",
+    "precommit": "zero pre-commit"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@helpscout/zero": "3.1.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
