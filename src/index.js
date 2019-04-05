@@ -1,1 +1,1 @@
-// Happy Coding!
+export { default as createTypes } from './createTypes'
