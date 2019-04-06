@@ -1,5 +1,5 @@
 import createResource from './createResource'
-import registerApiEndPoint from './resgisterApiEndPoint'
+import registerApiEndPoint from './registerApiEndPoint'
 
 const createResources = (resources: Array<string>, extraArguments: any) => {
   const { api, apiClient } = extraArguments
