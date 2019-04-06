@@ -6,6 +6,7 @@
   "private": false,
   "scripts": {
     "prestart": "zero prestart",
+    "start": "npm run storybook",
     "build": "zero build",
     "lint": "zero lint",
     "dev": "zero test",
@@ -14,7 +15,8 @@
     "validate": "zero validate",
     "release": "zero release",
     "version": "zero build",
-    "precommit": "zero pre-commit"
+    "precommit": "zero pre-commit",
+    "storybook": "start-storybook -p 6776"
   },
   "files": [
     "dist",
@@ -45,10 +47,17 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@helpscout/hsds-react": "2.22.0",
     "@helpscout/zero": "3.1.1",
     "@types/enzyme": "3.9.0",
     "@types/jest": "24.0.11",
     "@types/react": "16.8.4",
+    "@storybook/addon-actions": "4.1.12",
+    "@storybook/addon-links": "4.1.12",
+    "@storybook/addons": "4.1.12",
+    "@storybook/cli": "4.1.12",
+    "@storybook/react": "4.1.12",
+    "babel-loader": "8.0.5",
     "enzyme": "3.9.0",
     "enzyme-adapter-react-16": "1.10.0",
     "react": "16.8.6",

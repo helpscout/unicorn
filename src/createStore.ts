@@ -15,8 +15,8 @@ const defaultOptions = {
 }
 
 export const createStore = (
-  reducer,
-  preloadedState = {},
+  reducer = () => {},
+  preloadedState,
   customMiddleware = [],
   options = defaultOptions,
 ): any => {

@@ -3,13 +3,19 @@ import Fragment from '@helpscout/react-utils/dist/Fragment'
 import Route from './Route'
 import Redirect from './Redirect'
 
-type CreateRouteOptions = {
+type CreateRouteProps = {
   routes: Array<any>
   redirects: Array<any>
 }
 
-const createRoutes = (options: CreateRouteOptions) => {
-  const { routes, redirects } = options
+const defaultProps = {
+  routes: [],
+  redirects: [],
+}
+
+const createRoutes = (props: CreateRouteProps = defaultProps) => {
+  const mergedProps = { ...defaultProps, ...props }
+  const { routes, redirects } = mergedProps
 
   const routeComponents = routes.map(props => <Route {...props} />)
   const redirectComponents = redirects.map(props => <Redirect {...props} />)
