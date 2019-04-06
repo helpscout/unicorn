@@ -110,7 +110,7 @@ export const connect = (
       }
 
       this.callAction('onBeforeFetch')()
-      this.actions.setLoadingStart()
+      this.callAction('setLoadingStart')()
 
       this.actions
         .fetch(this.getProps())
@@ -118,12 +118,12 @@ export const connect = (
           this.safeSetState({ isReady: true })
           this.callAction('onFetchSuccess')(response)
           this.callAction('onAfterFetch')()
-          this.actions.setLoadingEnd()
+          this.callAction('setLoadingEnd')()
         })
         .catch(error => {
           this.callAction('onFetchError')(error)
           this.callAction('onAfterFetch')()
-          this.actions.setLoadingEnd()
+          this.callAction('setLoadingEnd')()
         })
     }
 

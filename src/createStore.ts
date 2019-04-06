@@ -11,33 +11,48 @@ import { isDevelopmentEnv, isStorybookEnv } from './utils/env.utils'
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const defaultOptions = {
-  extraArguments: {},
+  extraArguments: { api: {}, apiClient: {} },
 }
 
 export const createStore = (
-  reducer = () => {},
+  reducer: any = () => {},
   preloadedState,
   customMiddleware = [],
   options = defaultOptions,
 ): any => {
   const middleware = []
-  const mergedOptions = { ...defaultOptions, ...options }
+  const mergedOptions = { ...defaultOptions, ...options } as any
+
   const { extraArguments } = mergedOptions
 
-  middleware.push(thunk.withExtraArgument(extraArguments))
-
-  if (isDevelopmentEnv() || isStorybookEnv()) {
-    const logger = createLogger({ collapsed: true })
-    middleware.push(logger)
+  const mergedExtraArguments = {
+    api: {},
+    apiClient: {},
+    ...extraArguments,
   }
 
-  middleware.concat(customMiddleware)
+  return (
+    { enhanceExtraArguments } = { enhanceExtraArguments: args => args },
+  ) => {
+    middleware.push(
+      thunk.withExtraArgument(enhanceExtraArguments(mergedExtraArguments)),
+    )
 
-  return createReduxStore(
-    reducer,
-    preloadedState,
-    composeEnhancers(applyMiddleware(...middleware)),
-  )
+    if (isDevelopmentEnv() || isStorybookEnv()) {
+      const logger = createLogger({ collapsed: true })
+      middleware.push(logger)
+    }
+
+    middleware.concat(customMiddleware)
+
+    const store = createReduxStore(
+      reducer,
+      preloadedState,
+      composeEnhancers(applyMiddleware(...middleware)),
+    )
+
+    return store
+  }
 }
 
 export default createStore

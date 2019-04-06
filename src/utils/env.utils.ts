@@ -4,7 +4,9 @@ export const getProcessEnv = n => {
 
 export const isStorybookEnv = () => {
   return !!(
-    getProcessEnv('STORYBOOK_GIT_BRANCH') || getProcessEnv('STORYBOOK_APP_NAME')
+    getProcessEnv('STORYBOOK_GIT_BRANCH') ||
+    getProcessEnv('STORYBOOK_APP_NAME') ||
+    global['STORYBOOK_ENV']
   )
 }
 

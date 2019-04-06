@@ -1,5 +1,6 @@
 // Creators
 export { default as createApiTypes } from './createApiTypes'
+export { default as createResources } from './createResources'
 export { default as createRoutes } from './createRoutes'
 export { default as createStore } from './createStore'
 export { default as createTypes } from './createTypes'
@@ -11,6 +12,8 @@ export { default as AppProvider } from './AppProvider'
 export { default as Provider } from './Provider'
 
 // Router
+export { default as Link } from './Link'
+export { default as NavLink } from './NavLink'
 export { default as Redirect } from './Redirect'
 export { default as Route } from './Route'
 export { default as Router } from './Router'

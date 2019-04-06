@@ -18,7 +18,7 @@ describe('createStore', () => {
           return state
       }
     }
-    const store = createStore(reducer, initialState)
+    const store = createStore(reducer, initialState)()
 
     expect(store.getState().app).toBe('unicorn')
     expect(store.getState().isLast).toBe(false)

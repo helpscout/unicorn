@@ -17,8 +17,12 @@ const createRoutes = (props: CreateRouteProps = defaultProps) => {
   const mergedProps = { ...defaultProps, ...props }
   const { routes, redirects } = mergedProps
 
-  const routeComponents = routes.map(props => <Route {...props} />)
-  const redirectComponents = redirects.map(props => <Redirect {...props} />)
+  const routeComponents = routes.map((props, index) => (
+    <Route {...props} key={`route-${index}`} />
+  ))
+  const redirectComponents = redirects.map((props, index) => (
+    <Redirect {...props} key={`redirect-${index}`} />
+  ))
 
   const routeCollection = [...routeComponents, ...redirectComponents]
 

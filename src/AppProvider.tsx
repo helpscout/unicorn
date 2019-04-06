@@ -1,15 +1,20 @@
 import * as React from 'react'
 import Fragment from '@helpscout/react-utils/dist/Fragment'
 import Router from './Router'
+import Switch from './Switch'
 import Provider from './Provider'
+import createResources from './createResources'
 
 interface Props {
   basename?: string
   children: any
   forceRefresh?: boolean
   getUserConfirmation?: () => void
+  initialEntries?: Array<any>
+  initialIndex?: number
   keyLength?: number
-  routes: Array<T>
+  resources?: Array<any>
+  routes: Array<any>
   store: any
 }
 
@@ -20,24 +25,38 @@ export class AppProvider extends React.Component<Props> {
       children,
       forceRefresh,
       getUserConfirmation,
+      initialEntries,
+      initialIndex,
       keyLength,
+      resources: resourcesProp,
       routes,
-      store,
+      store: createStore,
     } = this.props
 
     const routerProps = {
       basename,
       forceRefresh,
       getUserConfirmation,
+      initialEntries,
+      initialIndex,
       keyLength,
     }
+
+    let resources
+
+    const enhanceExtraArguments = extraArguments => {
+      resources = createResources(resourcesProp, extraArguments)
+      return { ...extraArguments, resources }
+    }
+
+    const store = createStore({ enhanceExtraArguments })
 
     return (
       <Provider store={store}>
         <Router {...routerProps}>
           <Fragment>
-            {routes}
             {children}
+            <Switch>{routes}</Switch>
           </Fragment>
         </Router>
       </Provider>
