@@ -5,13 +5,14 @@ import {
 } from 'redux'
 import thunk from 'redux-thunk'
 import { createLogger } from 'redux-logger'
+import createApiClient from './createApiClient'
 import { isDevelopmentEnv, isStorybookEnv } from './utils/env.utils'
 
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const defaultOptions = {
-  extraArguments: { api: {}, apiClient: {} },
+  extraArguments: { api: {}, apiClient: createApiClient() },
 }
 
 export const createStore = (
@@ -26,8 +27,7 @@ export const createStore = (
   const { extraArguments } = mergedOptions
 
   const mergedExtraArguments = {
-    api: {},
-    apiClient: {},
+    ...defaultOptions.extraArguments,
     ...extraArguments,
   }
 

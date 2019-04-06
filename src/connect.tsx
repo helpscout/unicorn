@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { bindActionCreators } from 'redux'
 import hoistNonReactStatics from '@helpscout/react-utils/dist/hoistNonReactStatics'
+import { CONTEXT_KEYS } from './constants'
 import connectWithRouter from './connectWithRouter'
 
 export const FETCH_HOOKS = [
@@ -29,11 +30,17 @@ export const getFetchHooksFromStatic = WrappedComponent => {
 }
 
 export const connect = (
-  mapStateToProps,
-  mapDispatchToProps = {},
-  mergeProps,
+  mapStateToProps = null,
+  mapDispatchToProps: any = {},
+  mergeProps = null,
 ) => WrappedComponent => {
   class WithData extends React.Component<Props, State> {
+    static contextTypes = {
+      [CONTEXT_KEYS.apiClient]: () => {},
+      [CONTEXT_KEYS.api]: () => {},
+      [CONTEXT_KEYS.resources]: () => {},
+    }
+
     _isMounted = false
     actions: any
 
@@ -88,6 +95,9 @@ export const connect = (
       return {
         ...this.props,
         ...this.actions,
+        api: this.context[CONTEXT_KEYS.api],
+        apiClient: this.context[CONTEXT_KEYS.apiClient],
+        resources: this.context[CONTEXT_KEYS.resources],
       }
     }
 
