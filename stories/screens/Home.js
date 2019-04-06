@@ -5,8 +5,8 @@ const Home = () => {
   return <div>Hallo</div>
 }
 
-Home.fetch = () => (dispatch, getState, { resources }) => {
-  console.log(resources)
+Home.fetch = () => (dispatch, getState, { api, resources }) => {
+  console.log({ api, resources })
   return new Promise((resolve, reject) => {
     setTimeout(() => resolve(), 1000)
   })
