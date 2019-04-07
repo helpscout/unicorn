@@ -1,4 +1,5 @@
 import get from 'dash-get'
+export * from './cache.selectors'
 
 export const getById = (state, ownProps) => (resource, id) => {
   const entryId = ownProps ? getIdFromProps(ownProps) : id

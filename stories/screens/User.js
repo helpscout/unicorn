@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { connect, selectors } from '../../src'
+import { connect, getById } from '../../src'
 
 const User = props => {
   const { name, email, username } = props
@@ -18,7 +18,7 @@ const User = props => {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const user = selectors.getById(state, ownProps)('users')
+  const user = getById(state, ownProps)('users')
   return user
 }
 

@@ -1,5 +1,4 @@
-import * as selectorsUtils from './selectors'
-export const selectors = selectorsUtils
+export * from './selectors'
 
 // Creators
 export { default as createApiClient } from './createApiClient'

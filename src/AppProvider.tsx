@@ -1,5 +1,6 @@
 import * as React from 'react'
 import Fragment from '@helpscout/react-utils/dist/Fragment'
+import * as appCache from './appCache'
 import { CONTEXT_KEYS } from './constants'
 import Router from './Router'
 import ScrollToTop from './ScrollToTop'
@@ -14,8 +15,6 @@ interface Props {
   children: any
   forceRefresh?: boolean
   getUserConfirmation?: () => void
-  initialEntries?: Array<any>
-  initialIndex?: number
   keyLength?: number
   resources?: Array<any>
   routes: Array<any>
@@ -28,6 +27,7 @@ export class AppProvider extends React.Component<Props> {
   apiEndPoints = {}
   history = null
   resources = {}
+  store = null
 
   static childContextTypes = {
     [CONTEXT_KEYS.api]: () => {},
@@ -37,11 +37,34 @@ export class AppProvider extends React.Component<Props> {
     [CONTEXT_KEYS.resources]: () => {},
   }
 
+  componentWillMount() {
+    this.createStore()
+    this.initializeAppCache()
+  }
+
+  createStore() {
+    this.store = this.props.store({
+      enhanceExtraArguments: this.enhanceExtraArguments,
+    })
+  }
+
+  initializeAppCache() {
+    appCache.initialize()
+    appCache.setState({
+      api: this.api,
+      apiClient: this.apiClient,
+      apiEndPoints: this.apiEndPoints,
+      history: this.history,
+      resources: this.resources,
+      store: this.store,
+    })
+  }
+
   getChildContext() {
     return {
       [CONTEXT_KEYS.api]: this.api,
       [CONTEXT_KEYS.apiClient]: this.apiClient,
-      [CONTEXT_KEYS.apiEndPoints]: this.apiClient,
+      [CONTEXT_KEYS.apiEndPoints]: this.apiEndPoints,
       [CONTEXT_KEYS.history]: this.history,
       [CONTEXT_KEYS.resources]: this.resources,
     }
@@ -52,7 +75,7 @@ export class AppProvider extends React.Component<Props> {
   }
 
   enhanceExtraArguments = extraArguments => {
-    const { api, history } = extraArguments
+    const { history } = extraArguments
 
     const apiClient = this.getApiClientFromArgs(extraArguments)
 
@@ -81,25 +104,18 @@ export class AppProvider extends React.Component<Props> {
       children,
       forceRefresh,
       getUserConfirmation,
-      initialEntries,
-      initialIndex,
       keyLength,
       routes,
-      store: createStore,
     } = this.props
 
     const routerProps = {
       basename,
       forceRefresh,
       getUserConfirmation,
-      initialEntries,
-      initialIndex,
       keyLength,
     }
 
-    const store = createStore({
-      enhanceExtraArguments: this.enhanceExtraArguments,
-    })
+    const store = this.store
 
     return (
       <Provider store={store}>

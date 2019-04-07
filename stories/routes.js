@@ -1,4 +1,4 @@
-import { createRoutes, selectors } from '../src'
+import { createRoutes } from '../src'
 import Home from './screens/Home'
 import Users from './screens/Users'
 import User from './screens/User'
