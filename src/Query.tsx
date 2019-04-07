@@ -3,6 +3,7 @@ import bindActionCreator from './bindActionCreator'
 import connect from './connect'
 
 interface Props {
+  api: any
   children?: any
   dispatch: any
   query: (props: any) => void
@@ -19,8 +20,20 @@ export class Query extends React.Component<Props> {
     this.runQuery()
   }
 
+  getQuery = () => {
+    const { api, query } = this.props
+
+    if (typeof query === 'string') {
+      return api[query].get
+    }
+
+    return query
+  }
+
   runQuery = () => {
-    const { query, ...rest } = this.props
+    const { query: queryProp, ...rest } = this.props
+
+    const query = this.getQuery()
 
     this.setState({ loading: true })
 

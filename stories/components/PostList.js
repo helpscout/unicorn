@@ -2,7 +2,7 @@ import * as React from 'react'
 import { withQuery } from '../../src'
 import Post from './Post'
 
-const Posts = props => {
+const PostList = props => {
   const { loading, error, data } = props
   if (loading) return <div>Loading...</div>
   if (error) return <div>Error!</div>
@@ -10,6 +10,4 @@ const Posts = props => {
   return data.map(post => <Post {...post} key={post.id} />)
 }
 
-const createQuery = props => props.api.posts.get()
-
-export default withQuery({ query: createQuery })(Posts)
+export default withQuery({ query: 'posts' })(PostList)

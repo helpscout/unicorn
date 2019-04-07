@@ -5,7 +5,7 @@ export const Nav = () => {
   return (
     <div>
       <Link to="/">Home</Link>
-      <Link to="/about">About</Link>
+      <Link to="/users">Users</Link>
     </div>
   )
 }

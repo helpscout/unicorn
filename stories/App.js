@@ -4,10 +4,11 @@ import Nav from './app/Nav'
 import store from './store'
 import routes from './routes'
 
-const resources = ['posts']
 const apiClient = createApiClient({
   baseURL: 'https://jsonplaceholder.typicode.com',
 })
+
+const resources = ['posts', 'users']
 
 const App = () => {
   return (
