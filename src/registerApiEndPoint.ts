@@ -1,13 +1,19 @@
-const makeCreateUrlPathWithId = resource => props => `/${resource}/${props.id}`
+const makeCreateUrlPath = resource => props => {
+  if (props && props.id) {
+    return `/${resource}/${props.id}`
+  } else {
+    return `/${resource}`
+  }
+}
 
 const registerApiEndPoint = ({ apiEndPoints, apiClient, resource }) => {
-  const createUrl = makeCreateUrlPathWithId(resource)
+  const createUrl = makeCreateUrlPath(resource)
 
   const endpoints = {
     get: props => {
       return props && props.id
         ? apiClient.get(createUrl(props), props)
-        : apiClient.get('/')
+        : apiClient.get(createUrl(props))
     },
 
     patch: props => apiClient.patch(createUrl(props), props),
@@ -17,7 +23,7 @@ const registerApiEndPoint = ({ apiEndPoints, apiClient, resource }) => {
     post: props => {
       return props && props.id
         ? apiClient.post(createUrl(props), props)
-        : apiClient.post('/', props)
+        : apiClient.post(createUrl(props), props)
     },
 
     delete: props => apiClient.delete(createUrl(props), props),

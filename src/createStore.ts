@@ -6,6 +6,7 @@ import {
 import thunk from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import createApiClient from './createApiClient'
+import combineResourceReducers from './combineResourceReducers'
 import { isDevelopmentEnv, isStorybookEnv } from './utils/env.utils'
 
 // @ts-ignore
@@ -34,9 +35,8 @@ export const createStore = (
   return (
     { enhanceExtraArguments } = { enhanceExtraArguments: args => args },
   ) => {
-    middleware.push(
-      thunk.withExtraArgument(enhanceExtraArguments(mergedExtraArguments)),
-    )
+    const enhancedArguments = enhanceExtraArguments(mergedExtraArguments)
+    middleware.push(thunk.withExtraArgument(enhancedArguments))
 
     if (isDevelopmentEnv() || isStorybookEnv()) {
       const logger = createLogger({ collapsed: true })
@@ -45,8 +45,10 @@ export const createStore = (
 
     middleware.concat(customMiddleware)
 
+    const enhancedReducer = combineResourceReducers(enhancedArguments.resources)
+
     const store = createReduxStore(
-      reducer,
+      enhancedReducer,
       preloadedState,
       composeEnhancers(applyMiddleware(...middleware)),
     )

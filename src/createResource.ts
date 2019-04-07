@@ -1,5 +1,6 @@
 import get from 'dash-get'
 import createApiTypes, { apiActions } from './createApiTypes'
+import createResourceReducer from './createResourceReducer'
 
 export const createApiAction = ({ resource, method, types }) => {
   return props => (dispatch, getState, { apiEndPoints }) => {
@@ -17,6 +18,7 @@ export const createApiAction = ({ resource, method, types }) => {
             response,
           },
         })
+        return getState()[resource]
       })
       .catch(response => {
         dispatch({
@@ -25,6 +27,7 @@ export const createApiAction = ({ resource, method, types }) => {
             response,
           },
         })
+        return response
       })
   }
 }
@@ -42,10 +45,12 @@ export const createApiActions = (resource: string, types: any) => {
 export const createResource = (resource: string) => {
   const apiTypes = createApiTypes(resource)
   const apiActions = createApiActions(resource, apiTypes)
+  const reducer = createResourceReducer(resource, apiTypes)
 
   return {
     apiTypes,
     apiActions,
+    reducer,
   }
 }
 
