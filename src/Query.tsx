@@ -3,7 +3,7 @@ import bindActionCreator from './bindActionCreator'
 import connect from './connect'
 
 interface Props {
-  children: any
+  children?: any
   dispatch: any
   query: (props: any) => void
 }

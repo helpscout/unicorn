@@ -3,10 +3,10 @@ import React from 'react'
 const Post = props => {
   const { title, body } = props
   return (
-    <p>
-      <strong>{title}</strong>
-      <div>{body}</div>
-    </p>
+    <div style={{ margin: '10px 0' }}>
+      <h2>{title}</h2>
+      <p>{body}</p>
+    </div>
   )
 }
 
