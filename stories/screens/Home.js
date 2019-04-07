@@ -1,8 +1,14 @@
 import * as React from 'react'
-import { withQuery } from '../../src'
-import Query from '../../src/Query'
+import { connect } from '../../src'
 import Posts from '../components/Posts'
 
-const createQuery = props => props.api.posts.get()
+const Home = () => {
+  return (
+    <div>
+      <h1>Home</h1>
+      <Posts />
+    </div>
+  )
+}
 
-export default withQuery({ query: createQuery })(Posts)
+export default connect()(Home)

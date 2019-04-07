@@ -1,4 +1,5 @@
-import React from 'react'
+import * as React from 'react'
+import { withQuery } from '../../src'
 import Post from './Post'
 
 const Posts = props => {
@@ -9,4 +10,6 @@ const Posts = props => {
   return data.map(post => <Post {...post} key={post.id} />)
 }
 
-export default Posts
+const createQuery = props => props.api.posts.get()
+
+export default withQuery({ query: createQuery })(Posts)
