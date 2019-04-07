@@ -1,6 +1,6 @@
-import { BrowserRouter, MemoryRouter } from 'react-router-dom'
+import { BrowserRouter, HashRouter } from 'react-router-dom'
 import { isStorybookEnv } from './utils/env.utils'
 
-const Router: any = isStorybookEnv() ? MemoryRouter : BrowserRouter
+const Router: any = isStorybookEnv() ? HashRouter : BrowserRouter
 
 export default Router
