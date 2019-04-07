@@ -3,6 +3,7 @@ import {
   createStore as createReduxStore,
   compose,
 } from 'redux'
+import { combineReducers } from 'redux'
 import thunk from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import createApiClient from './createApiClient'
@@ -13,12 +14,17 @@ import { isDevelopmentEnv, isStorybookEnv } from './utils/env.utils'
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const defaultOptions = {
-  extraArguments: { api: {}, apiClient: createApiClient() },
+  extraArguments: {
+    api: {},
+    apiEndPoints: {},
+    apiClient: createApiClient(),
+    resources: {},
+  },
 }
 
 export const createStore = (
   reducer: any = () => {},
-  preloadedState,
+  preloadedState?: any,
   customMiddleware = [],
   options = defaultOptions,
 ): any => {
@@ -46,9 +52,10 @@ export const createStore = (
     middleware.concat(customMiddleware)
 
     const enhancedReducer = combineResourceReducers(enhancedArguments.resources)
+    const baseReducer = typeof reducer === 'function' ? { reducer } : reducer
 
     const store = createReduxStore(
-      enhancedReducer,
+      combineReducers({ ...baseReducer, ...enhancedReducer }),
       preloadedState,
       composeEnhancers(applyMiddleware(...middleware)),
     )

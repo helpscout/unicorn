@@ -18,12 +18,12 @@ describe('createStore', () => {
           return state
       }
     }
-    const store = createStore(reducer, initialState)()
+    const store = createStore(reducer)()
 
-    expect(store.getState().app).toBe('unicorn')
-    expect(store.getState().isLast).toBe(false)
+    expect(store.getState().reducer.app).toBe('unicorn')
+    expect(store.getState().reducer.isLast).toBe(false)
 
     store.dispatch({ type: 'IS_LAST' })
-    expect(store.getState().isLast).toBe(true)
+    expect(store.getState().reducer.isLast).toBe(true)
   })
 })
