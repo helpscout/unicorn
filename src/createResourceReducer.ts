@@ -6,10 +6,19 @@ const createResourceReducer = (resource, apiTypes) => {
 
     switch (type) {
       case apiTypes.GET_SUCCEEDED:
+        return data
+
       case apiTypes.PATCH_SUCCEEDED:
       case apiTypes.PUT_SUCCEEDED:
       case apiTypes.POST_SUCCEEDED:
-        return data
+        const { id } = data
+        return data.map(item => {
+          if (item.id == id) {
+            item = data
+          }
+          return item
+        })
+
       default:
         return state
     }
