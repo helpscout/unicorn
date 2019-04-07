@@ -1,6 +1,7 @@
 import { createRoutes } from '../src'
 import Home from './screens/Home'
 import Users from './screens/Users'
+import User from './screens/User'
 
 const routes = [
   {
@@ -10,6 +11,10 @@ const routes = [
   {
     path: '/users',
     render: Users,
+  },
+  {
+    path: '/users/:id',
+    render: User,
   },
 ]
 

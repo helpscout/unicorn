@@ -1,3 +1,6 @@
+import * as selectorsUtils from './selectors'
+export const selectors = selectorsUtils
+
 // Creators
 export { default as createApiClient } from './createApiClient'
 export { default as createApiTypes } from './createApiTypes'
@@ -22,5 +25,6 @@ export { default as NavLink } from './NavLink'
 export { default as Redirect } from './Redirect'
 export { default as Route } from './Route'
 export { default as Router } from './Router'
+export { default as ScrollToTop } from './ScrollToTop'
 export { default as Switch } from './Switch'
 export { default as withRouter } from './withRouter'

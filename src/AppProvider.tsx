@@ -2,6 +2,7 @@ import * as React from 'react'
 import Fragment from '@helpscout/react-utils/dist/Fragment'
 import { CONTEXT_KEYS } from './constants'
 import Router from './Router'
+import ScrollToTop from './ScrollToTop'
 import Switch from './Switch'
 import Provider from './Provider'
 import createResources from './createResources'
@@ -104,6 +105,7 @@ export class AppProvider extends React.Component<Props> {
       <Provider store={store}>
         <Router {...routerProps}>
           <Fragment>
+            <ScrollToTop />
             {children}
             <Switch>{routes}</Switch>
           </Fragment>
