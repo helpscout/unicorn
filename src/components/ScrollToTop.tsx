@@ -1,5 +1,5 @@
 import * as React from 'react'
-import connectWithRouter from './connectWithRouter'
+import connectWithRouter from '../connect/connectWithRouter'
 
 export const scrollToTop = () => {
   window.scrollTo(0, 0)

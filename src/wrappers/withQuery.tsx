@@ -1,7 +1,7 @@
 import * as React from 'react'
 import hoistNonReactStatics from '@helpscout/react-utils/dist/hoistNonReactStatics'
-import connect from './connect'
-import Query from './Query'
+import connect from '../connect/connect'
+import Query from '../components/Query'
 
 const withQuery = ({ query }) => WrappedComponent => {
   interface Props {

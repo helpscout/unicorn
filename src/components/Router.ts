@@ -1,5 +1,5 @@
 import { BrowserRouter, HashRouter } from 'react-router-dom'
-import { isStorybookEnv } from './utils/env.utils'
+import { isStorybookEnv } from '../utils/env.utils'
 
 const Router: any = isStorybookEnv() ? HashRouter : BrowserRouter
 

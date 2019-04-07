@@ -1,13 +1,13 @@
 import * as React from 'react'
 import Fragment from '@helpscout/react-utils/dist/Fragment'
-import * as appCache from './appCache'
-import { CONTEXT_KEYS } from './constants'
+import * as appCache from '../core/appCache'
+import { CONTEXT_KEYS } from '../constants'
 import Router from './Router'
 import ScrollToTop from './ScrollToTop'
 import Switch from './Switch'
 import Provider from './Provider'
-import createResources from './createResources'
-import bindApiActions from './bindApiActions'
+import createResources from '../core/createResources'
+import bindApiActions from '../core/bindApiActions'
 
 interface Props {
   apiClient?: any

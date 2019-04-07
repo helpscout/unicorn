@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { bindActionCreators } from 'redux'
 import hoistNonReactStatics from '@helpscout/react-utils/dist/hoistNonReactStatics'
-import { CONTEXT_KEYS } from './constants'
+import { CONTEXT_KEYS } from '../constants'
 import connectWithRouter from './connectWithRouter'
 
 export const FETCH_HOOKS = [

@@ -1,5 +1,5 @@
 import get from 'dash-get'
-import * as appCache from '../appCache'
+import * as appCache from '../core/appCache'
 
 export const getCache = () => appCache.getState()
 export const getStore = () => appCache.get('store')

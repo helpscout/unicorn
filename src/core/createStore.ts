@@ -7,7 +7,7 @@ import thunk from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import createApiClient from './createApiClient'
 import combineResourceReducers from './combineResourceReducers'
-import { isDevelopmentEnv, isStorybookEnv } from './utils/env.utils'
+import { isDevelopmentEnv, isStorybookEnv } from '../utils/env.utils'
 
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import withRouter from './withRouter'
+import withRouter from '../wrappers/withRouter'
 import hoistNonReactStatics from '@helpscout/react-utils/dist/hoistNonReactStatics'
 
 export const connectWithRouter = (...args) => WrappedComponent => {

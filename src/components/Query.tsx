@@ -1,6 +1,6 @@
 import * as React from 'react'
-import bindActionCreator from './bindActionCreator'
-import connect from './connect'
+import bindActionCreator from '../core/bindActionCreator'
+import connect from '../connect/connect'
 
 interface Props {
   api: any
