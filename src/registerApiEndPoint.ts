@@ -1,22 +1,30 @@
-const registerApiEndPoint = ({ api, apiClient, resource }) => {
+const makeCreateUrlPathWithId = resource => props => `/${resource}/${props.id}`
+
+const registerApiEndPoint = ({ apiEndPoints, apiClient, resource }) => {
+  const createUrl = makeCreateUrlPathWithId(resource)
+
   const endpoints = {
     get: props => {
       return props && props.id
-        ? apiClient.get(props.id, props)
-        : apiClient.get()
+        ? apiClient.get(createUrl(props), props)
+        : apiClient.get('/')
     },
-    patch: props => apiClient.patch(props.id, props),
-    put: props => apiClient.put(props.id, props),
+
+    patch: props => apiClient.patch(createUrl(props), props),
+
+    put: props => apiClient.put(createUrl(props), props),
+
     post: props => {
       return props && props.id
-        ? apiClient.post(props.id, props)
-        : apiClient.post(props)
+        ? apiClient.post(createUrl(props), props)
+        : apiClient.post('/', props)
     },
-    delete: props => apiClient.delete(props.id, props),
+
+    delete: props => apiClient.delete(createUrl(props), props),
   }
 
-  // Register to the api
-  Object.assign(api, {
+  // Register to the apiEndpoints
+  Object.assign(apiEndPoints, {
     [resource]: endpoints,
   })
 }

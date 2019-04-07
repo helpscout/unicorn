@@ -2,14 +2,14 @@ import get from 'dash-get'
 import createApiTypes, { apiActions } from './createApiTypes'
 
 export const createApiAction = ({ resource, method, types }) => {
-  return props => (dispatch, getState, { api }) => {
-    const apiMethod = get(api, `${resource}.${method}`)
+  return props => (dispatch, getState, { apiEndPoints }) => {
+    const apiMethod = get(apiEndPoints, `${resource}.${method}`)
     if (!apiMethod) return
 
     const succeededType = `${method.toUpperCase()}_SUCCEEDED`
     const failedType = `${method.toUpperCase()}_FAILED`
 
-    return apiMethod()
+    return apiMethod(props)
       .then(response => {
         dispatch({
           type: types[succeededType],

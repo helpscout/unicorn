@@ -1,5 +1,6 @@
 // Creators
 export { default as createApiTypes } from './createApiTypes'
+export { default as createApiClient } from './createApiClient'
 export { default as createResources } from './createResources'
 export { default as createRoutes } from './createRoutes'
 export { default as createStore } from './createStore'
