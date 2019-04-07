@@ -1,23 +1,17 @@
 import * as React from 'react'
-import { AppProvider, createApiClient } from '../src'
+import { AppProvider } from '../src'
 import Nav from './app/Nav'
-import store from './store'
 import routes from './routes'
 
-const apiClient = createApiClient({
+const apiClient = {
   baseURL: 'https://jsonplaceholder.typicode.com',
-})
+}
 
 const resources = ['posts', 'users']
 
 const App = () => {
   return (
-    <AppProvider
-      apiClient={apiClient}
-      resources={resources}
-      store={store}
-      routes={routes}
-    >
+    <AppProvider apiClient={apiClient} resources={resources} routes={routes}>
       <Nav />
     </AppProvider>
   )

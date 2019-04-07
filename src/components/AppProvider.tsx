@@ -6,8 +6,11 @@ import Router from './Router'
 import ScrollToTop from './ScrollToTop'
 import Switch from './Switch'
 import Provider from './Provider'
-import createResources from '../core/createResources'
 import bindApiActions from '../core/bindApiActions'
+import createApiClient from '../core/createApiClient'
+import createResources from '../core/createResources'
+import createStore from '../core/createStore'
+import { isFunction, isObject } from '../utils/is.utils'
 
 interface Props {
   apiClient?: any
@@ -43,9 +46,24 @@ export class AppProvider extends React.Component<Props> {
   }
 
   createStore() {
-    this.store = this.props.store({
+    const { store: storeProp } = this.props
+    const store = storeProp || createStore()
+
+    this.store = store({
       enhanceExtraArguments: this.enhanceExtraArguments,
     })
+  }
+
+  createApiClient(apiClient) {
+    if (isFunction(apiClient)) {
+      return apiClient
+    }
+
+    if (isObject(apiClient)) {
+      return createApiClient(apiClient)
+    }
+
+    return createApiClient()
   }
 
   initializeAppCache() {
@@ -79,11 +97,12 @@ export class AppProvider extends React.Component<Props> {
 
     const apiClient = this.getApiClientFromArgs(extraArguments)
 
-    this.apiClient = apiClient
+    this.apiClient = this.createApiClient(apiClient)
     this.history = history
+
     this.resources = createResources(this.props.resources, {
       ...extraArguments,
-      apiClient,
+      apiClient: this.apiClient,
       apiEndPoints: this.apiEndPoints,
     })
 
@@ -92,7 +111,7 @@ export class AppProvider extends React.Component<Props> {
     return {
       ...extraArguments,
       api: this.api,
-      apiClient,
+      apiClient: this.apiClient,
       apiEndPoints: this.apiEndPoints,
       resources: this.resources,
     }
