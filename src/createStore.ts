@@ -3,7 +3,6 @@ import {
   createStore as createReduxStore,
   compose,
 } from 'redux'
-import { combineReducers } from 'redux'
 import thunk from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import createApiClient from './createApiClient'
@@ -23,7 +22,7 @@ const defaultOptions = {
 }
 
 export const createStore = (
-  reducer: any = () => {},
+  reducer: any = () => null,
   preloadedState?: any,
   customMiddleware = [],
   options = defaultOptions,
@@ -51,11 +50,13 @@ export const createStore = (
 
     middleware.concat(customMiddleware)
 
-    const enhancedReducer = combineResourceReducers(enhancedArguments.resources)
-    const baseReducer = typeof reducer === 'function' ? { reducer } : reducer
+    const combinedReducer = combineResourceReducers(
+      reducer,
+      enhancedArguments.resources,
+    )
 
     const store = createReduxStore(
-      combineReducers({ ...baseReducer, ...enhancedReducer }),
+      combinedReducer,
       preloadedState,
       composeEnhancers(applyMiddleware(...middleware)),
     )
